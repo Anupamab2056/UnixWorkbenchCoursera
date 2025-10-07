@@ -1,0 +1,13 @@
+# File: Makefile
+
+README.md: guessinggame.sh
+	echo "# The Guessing Game" > README.md
+	echo "" >> README.md
+	echo "## Date and Time" >> README.md
+	date >> README.md
+	echo "" >> README.md
+	echo "## Number of Lines in guessinggame.sh" >> README.md
+	wc -l guessinggame.sh | egrep -o "[0-9]+" >> README.md
+
+clean:
+	rm -f README.md
