@@ -1,23 +1,29 @@
-#!/usr/bin/env bash
-# File: guessinggame.sh
+#!/bin/bash
 
-function ask_guess {
-  echo "How many files are in the current directory?"
-  read guess
+# Function to count files in the current directory
+function file_count {
+  echo $(ls -1 | wc -l)
 }
 
-file_count=$(ls -1 | wc -l)
-ask_guess
+# Get the correct answer
+correct=$(file_count)
 
-while [[ $guess -ne $file_count ]]
+echo "Welcome to the Guessing Game!"
+echo "Guess how many files are in the current directory:"
+
+# Start guessing loop
+while true
 do
-  if [[ $guess -lt $file_count ]]
-  then
-    echo "Too low! Try again."
-  else
-    echo "Too high! Try again."
-  fi
-  ask_guess
-done
+  read guess
 
-echo "Congratulations! You guessed right!"
+  if [[ $guess -eq $correct ]]
+  then
+    echo "🎉 Congratulations! You guessed it right!"
+    break
+  elif [[ $guess -lt $correct ]]
+  then
+    echo "Too low! Try again:"
+  else
+    echo "Too high! Try again:"
+  fi
+done
